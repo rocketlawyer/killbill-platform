@@ -52,12 +52,13 @@
         <dependency>
             <groupId>org.kill-bill.billing</groupId>
             <artifactId>killbill-api</artifactId>
-            <version>0.16-SNAPSHOT</version>
+            <version>0.15-SNAPSHOT</version>
         </dependency>
         <dependency>
             <!-- To fix a compilation failure on jdk 1.8 -->
             <groupId>org.kill-bill.billing</groupId>
             <artifactId>killbill-platform-osgi-api</artifactId>
+            <version>0.3-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -83,7 +84,7 @@
         <dependency>
             <groupId>org.kill-bill.billing.plugin</groupId>
             <artifactId>killbill-plugin-api-catalog</artifactId>
-            <version>0.11-SNAPSHOT</version>
+            <version>0.10-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.kill-bill.commons</groupId>

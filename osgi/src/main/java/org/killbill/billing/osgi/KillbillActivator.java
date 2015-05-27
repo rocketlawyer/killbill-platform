@@ -126,8 +126,8 @@ public class KillbillActivator implements BundleActivator, ServiceListener {
     }
 
     @Inject(optional = true)
-    public void addCatalogPluginApiOSGIServiceRegistration(final OSGIServiceRegistration<CatalogPluginApi> catalogProviderPluginResgistry) {
-        allRegistrationHandlers.add(catalogProviderPluginResgistry);
+    public void addCatalogPluginApiOSGIServiceRegistration(final OSGIServiceRegistration<CatalogPluginApi> catalogProviderPluginRegistry) {
+        allRegistrationHandlers.add(catalogProviderPluginRegistry);
     }
 
     @Override

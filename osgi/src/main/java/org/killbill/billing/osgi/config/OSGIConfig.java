@@ -51,6 +51,7 @@ public interface OSGIConfig extends KillbillPlatformConfig {
              "org.killbill.billing.analytics.api.user," +
              "org.killbill.billing.beatrix.bus.api," +
              "org.killbill.billing.catalog.api," +
+             "org.killbill.billing.catalog.api.rules," +
              "org.killbill.billing.invoice.plugin.api," +
              "org.killbill.billing.invoice.api," +
              "org.killbill.billing.entitlement.api," +
@@ -63,7 +64,7 @@ public interface OSGIConfig extends KillbillPlatformConfig {
              "org.killbill.billing.overdue," +
              "org.killbill.billing.payment.api," +
              "org.killbill.billing.payment.plugin.api," +
-             "org.killbill.billing.routing.plugin.api," +
+             "org.killbill.billing.control.plugin.api," +
              "org.killbill.billing.tenant.api," +
              "org.killbill.billing.usage.api," +
              "org.killbill.billing.util.api," +
@@ -76,6 +77,8 @@ public interface OSGIConfig extends KillbillPlatformConfig {
              "org.killbill.billing.util.template," +
              "org.killbill.billing.util.template.translation," +
              "org.killbill.billing.currency.plugin.api," +
+             "org.killbill.billing.catalog.plugin.api," +
+             "org.killbill.billing.entitlement.plugin.api," +
              "org.killbill.billing.currency.api," +
              "org.killbill.billing.security.api," +
              "org.killbill.killbill.osgi.libs.killbill," +
@@ -179,10 +182,23 @@ public interface OSGIConfig extends KillbillPlatformConfig {
              "com.sun.xml.internal.ws.wsdl.writer.document.soap," +
              "com.sun.xml.internal.ws.wsdl.writer.document.soap12," +
              "com.sun.xml.internal.ws.wsdl.writer.document.xsd," +
-             // sax parser
+             // javax packages
+             "javax.annotation," +
+             "javax.management," +
+             "javax.naming," +
              "javax.net," +
              "javax.net.ssl," +
+             "javax.crypto," +
+             "javax.crypto.spec," +
+             "javax.sql," +
+             "javax.sql.rowset," +
+             "javax.sql.rowset.serial," +
+             "javax.transaction," +
+             "javax.transaction.xa," +
+             // XML (sax parser)
              "javax.xml," +
+             "javax.xml.bind," +
+             "javax.xml.validation," +
              "javax.xml.namespace," +
              "javax.xml.parsers," +
              "javax.xml.validation," +
@@ -195,7 +211,6 @@ public interface OSGIConfig extends KillbillPlatformConfig {
              "javax.xml.transform.stax," +
              "javax.xml.transform.stream," +
              "javax.xml.xpath," +
-             "javax.annotation," +
              "javax.jws.soap," +
              "com.sun.org," +
              "com.sun.org.apache," +
@@ -226,10 +241,6 @@ public interface OSGIConfig extends KillbillPlatformConfig {
              "sun.misc.unsafe," +
              "sun.security," +
              "sun.security.util," +
-             "javax.crypto," +
-             "javax.crypto.spec," +
-             "javax.management," +
-             "javax.naming," +
              "javax.servlet;version=3.1," +
              "javax.servlet.http;version=3.1")
     @Description("Java extension/platform Packages to export from the system bundle")

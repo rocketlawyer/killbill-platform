@@ -89,6 +89,11 @@ public abstract class JRubyPlugin {
 
         container = setupScriptingContainer();
 
+        final Ruby runtime = container.getProvider().getRuntime();
+        final String version = bundleContext.getBundle().getVersion().toString();
+        // allows plugins to easily distinguish they're running inside KB with a defined? ...
+        runtime.defineGlobalConstant("KILLBILL_PLATFORM_VERSION", runtime.newString(version));
+
         checkValidPlugin();
 
         // Register all killbill APIs
@@ -154,13 +159,13 @@ public abstract class JRubyPlugin {
 
     private void checkValidPlugin() {
         try {
-            container.runScriptlet(checkInstanceOfPlugin(KILLBILL_PLUGIN_BASE));
+            container.runScriptlet(rubyInstanceOfPluginCheck(KILLBILL_PLUGIN_BASE));
         } catch (final EvalFailedException e) {
             throw new IllegalArgumentException(e);
         }
     }
 
-    private String checkInstanceOfPlugin(final String baseClass) {
+    private String rubyInstanceOfPluginCheck(final String baseClass) {
         // Note: this call can be quite expensive, between 50ms and 100+ms for common plugins
         final StringBuilder builder = new StringBuilder(getPluginBootScript());
         builder.append("raise ArgumentError.new('Invalid plugin: ")
@@ -240,6 +245,8 @@ public abstract class JRubyPlugin {
         if ( pluginLibdir != null ) {
             scriptingContainer.setLoadPaths( Collections.singletonList(pluginLibdir) );
         }
+        // scriptingContainer.setCurrentDirectory(pluginRoot);
+        // not doing this now (done in boot.rb) for backwards-compatibility
         return scriptingContainer;
     }
 
@@ -264,12 +271,12 @@ public abstract class JRubyPlugin {
         return escaped;
     }
 
-    protected abstract class PluginCallback<T> {
+    protected abstract class PluginCallback<T, E extends Throwable> {
 
-        public abstract T doCall(final Ruby runtime) throws PaymentPluginApiException;
+        public abstract T doCall(final Ruby runtime) throws E;
     }
 
-    protected <T> T callWithRuntimeAndChecking(final PluginCallback<T> cb) throws PaymentPluginApiException {
+    protected <T, E extends Throwable> T callWithRuntimeAndChecking(final PluginCallback<T, E > cb) throws E {
         try {
             checkPluginIsRunning();
             final Ruby runtime = getRuntime();

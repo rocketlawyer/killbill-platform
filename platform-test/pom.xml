@@ -21,7 +21,7 @@
     <parent>
         <artifactId>killbill-platform</artifactId>
         <groupId>org.kill-bill.billing</groupId>
-        <version>0.3-SNAPSHOT</version>
+        <version>0.7-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>killbill-platform-test</artifactId>
@@ -143,7 +143,22 @@
         </dependency>
         <dependency>
             <groupId>org.kill-bill.billing.plugin</groupId>
+            <artifactId>killbill-plugin-api-catalog</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.kill-bill.billing.plugin</groupId>
+            <artifactId>killbill-plugin-api-control</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.kill-bill.billing.plugin</groupId>
             <artifactId>killbill-plugin-api-currency</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.kill-bill.billing.plugin</groupId>
+            <artifactId>killbill-plugin-api-entitlement</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -159,11 +174,6 @@
         <dependency>
             <groupId>org.kill-bill.billing.plugin</groupId>
             <artifactId>killbill-plugin-api-payment</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.kill-bill.billing.plugin</groupId>
-            <artifactId>killbill-plugin-api-routing</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -191,7 +201,6 @@
         <dependency>
             <groupId>org.kill-bill.commons</groupId>
             <artifactId>killbill-embeddeddb-postgresql</artifactId>
-            <version>${killbill-commons.version}</version>
         </dependency>
         <dependency>
             <groupId>org.kill-bill.commons</groupId>

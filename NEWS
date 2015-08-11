@@ -1,3 +1,20 @@
+0.6
+    PostgreSQL support
+    Update killbill-oss-parent to 0.30
+    Rename PaymentRoutingPluginApi to PaymentControlPluginApi
+
+0.5
+    Add support for new EntitlementPluginApi (no ruby yet)
+    Update killbill-oss-parent to 0.25
+
+0.4
+    Add missing import/export package in OSGIConfig and for the JRuby MANIFEST plugin
+
+0.3
+    Add JRuby support for catalog and control plugins
+    Expose KILLBILL_PLATFORM_VERSION constant for JRuby plugins
+    Add missing import/export javax packages
+
 0.2
     Upgrade Dropwizard metrics (3.1.1)
     - enable JVM, servlet and jDBI metrics

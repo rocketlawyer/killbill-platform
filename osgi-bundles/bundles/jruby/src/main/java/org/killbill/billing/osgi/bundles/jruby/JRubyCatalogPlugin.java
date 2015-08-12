@@ -19,27 +19,24 @@ package org.killbill.billing.osgi.bundles.jruby;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
-import java.util.List;
 
 import org.jruby.Ruby;
-import org.killbill.billing.invoice.api.Invoice;
-import org.killbill.billing.invoice.api.InvoiceItem;
-import org.killbill.billing.invoice.plugin.api.InvoicePluginApi;
+import org.killbill.billing.catalog.plugin.api.CatalogPluginApi;
+import org.killbill.billing.catalog.plugin.api.VersionedPluginCatalog;
 import org.killbill.billing.osgi.api.OSGIPluginProperties;
 import org.killbill.billing.osgi.api.config.PluginRubyConfig;
 import org.killbill.billing.payment.api.PluginProperty;
-import org.killbill.billing.payment.plugin.api.PaymentPluginApiException;
-import org.killbill.billing.util.callcontext.CallContext;
+import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.killbill.osgi.libs.killbill.OSGIConfigPropertiesService;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.log.LogService;
 
-public class JRubyInvoicePlugin extends JRubyNotificationPlugin implements InvoicePluginApi {
+public class JRubyCatalogPlugin extends JRubyNotificationPlugin implements CatalogPluginApi {
 
-    private volatile ServiceRegistration invoicePluginRegistration;
+    private volatile ServiceRegistration serviceRegistration;
 
-    public JRubyInvoicePlugin(final PluginRubyConfig config, final BundleContext bundleContext, final LogService logger, final OSGIConfigPropertiesService configProperties) {
+    public JRubyCatalogPlugin(final PluginRubyConfig config, final BundleContext bundleContext, final LogService logger, final OSGIConfigPropertiesService configProperties) {
         super(config, bundleContext, logger, configProperties);
     }
 
@@ -50,23 +47,23 @@ public class JRubyInvoicePlugin extends JRubyNotificationPlugin implements Invoi
         final Dictionary<String, Object> props = new Hashtable<String, Object>();
         props.put("name", pluginMainClass);
         props.put(OSGIPluginProperties.PLUGIN_NAME_PROP, pluginGemName);
-        invoicePluginRegistration = context.registerService(InvoicePluginApi.class.getName(), this, props);
+        serviceRegistration = context.registerService(CatalogPluginApi.class.getName(), this, props);
     }
 
     @Override
     public void stopPlugin(final BundleContext context) {
-        if (invoicePluginRegistration != null) {
-            invoicePluginRegistration.unregister();
+        if (serviceRegistration != null) {
+            serviceRegistration.unregister();
         }
         super.stopPlugin(context);
     }
 
     @Override
-    public List<InvoiceItem> getAdditionalInvoiceItems(final Invoice invoice, final Iterable<PluginProperty> properties, final CallContext context) {
-        return callWithRuntimeAndChecking(new PluginCallback<List<InvoiceItem>, RuntimeException>() {
+    public VersionedPluginCatalog getVersionedPluginCatalog(final Iterable<PluginProperty> pluginProperties, final TenantContext tenantContext) {
+        return callWithRuntimeAndChecking(new PluginCallback<VersionedPluginCatalog, RuntimeException>() {
             @Override
-            public List<InvoiceItem> doCall(final Ruby runtime) {
-                return ((InvoicePluginApi) pluginInstance).getAdditionalInvoiceItems(invoice, properties, context);
+            public VersionedPluginCatalog doCall(final Ruby runtime) throws RuntimeException {
+                return ((CatalogPluginApi) pluginInstance).getVersionedPluginCatalog(pluginProperties, tenantContext);
             }
         });
     }

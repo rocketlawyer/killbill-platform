@@ -32,7 +32,9 @@ import javax.inject.Named;
 import javax.servlet.Servlet;
 import javax.sql.DataSource;
 
+import org.killbill.billing.catalog.plugin.api.CatalogPluginApi;
 import org.killbill.billing.currency.plugin.api.CurrencyPluginApi;
+import org.killbill.billing.entitlement.plugin.api.EntitlementPluginApi;
 import org.killbill.billing.invoice.plugin.api.InvoicePluginApi;
 import org.killbill.billing.osgi.api.OSGIConfigProperties;
 import org.killbill.billing.osgi.api.OSGIKillbill;
@@ -43,7 +45,7 @@ import org.killbill.billing.osgi.api.OSGIServiceRegistration;
 import org.killbill.billing.osgi.glue.DefaultOSGIModule;
 import org.killbill.billing.payment.plugin.api.PaymentPluginApi;
 import org.killbill.billing.platform.jndi.JNDIManager;
-import org.killbill.billing.routing.plugin.api.PaymentRoutingPluginApi;
+import org.killbill.billing.control.plugin.api.PaymentControlPluginApi;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceEvent;
@@ -120,8 +122,19 @@ public class KillbillActivator implements BundleActivator, ServiceListener {
     }
 
     @Inject(optional = true)
-    public void addPaymentControlPluginApiOSGIServiceRegistration(final OSGIServiceRegistration<PaymentRoutingPluginApi> paymentControlProviderPluginRegistry) {
+    public void addPaymentControlPluginApiOSGIServiceRegistration(final OSGIServiceRegistration<PaymentControlPluginApi> paymentControlProviderPluginRegistry) {
         allRegistrationHandlers.add(paymentControlProviderPluginRegistry);
+    }
+
+
+    @Inject(optional = true)
+    public void addCatalogPluginApiOSGIServiceRegistration(final OSGIServiceRegistration<CatalogPluginApi> catalogProviderPluginRegistry) {
+        allRegistrationHandlers.add(catalogProviderPluginRegistry);
+    }
+
+    @Inject(optional = true)
+    public void addEntitlementPluginApiOSGIServiceRegistration(final OSGIServiceRegistration<EntitlementPluginApi> entitlementProviderPluginRegistry) {
+        allRegistrationHandlers.add(entitlementProviderPluginRegistry);
     }
 
     @Override

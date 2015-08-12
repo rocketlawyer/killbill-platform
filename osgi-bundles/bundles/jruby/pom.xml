@@ -21,7 +21,7 @@
     <parent>
         <artifactId>killbill-platform-osgi-bundles</artifactId>
         <groupId>org.kill-bill.billing</groupId>
-        <version>0.3-SNAPSHOT</version>
+        <version>0.7-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>killbill-platform-osgi-bundles-jruby</artifactId>
@@ -78,6 +78,14 @@
         <dependency>
             <groupId>org.kill-bill.billing.plugin</groupId>
             <artifactId>killbill-plugin-api-payment</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.kill-bill.billing.plugin</groupId>
+            <artifactId>killbill-plugin-api-control</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.kill-bill.billing.plugin</groupId>
+            <artifactId>killbill-plugin-api-catalog</artifactId>
         </dependency>
         <dependency>
             <groupId>org.kill-bill.commons</groupId>
@@ -165,6 +173,7 @@
                             org.killbill.billing.subscription.api.transfer;
                             org.killbill.billing.subscription.api.user;
                             org.killbill.billing.junction.api;
+                            org.killbill.billing.catalog.api.rules;
                             org.killbill.billing;
                             org.killbill.billing.osgi.api;
                             org.killbill.billing.overdue;
@@ -184,10 +193,18 @@
                             sun.security.*;
                             sun.security.util;
                             sun.security.util.*;
+                            javax.annotation;
+                            javax.annotation.*;
                             javax.management;
                             javax.management.*;
                             javax.naming;
                             javax.naming.*;
+                            javax.sql;
+                            javax.sql.*;
+                            javax.sql.rowset;
+                            javax.sql.rowset.*;
+                            javax.sql.rowset.serial;
+                            javax.sql.rowset.serial.*;
                             javax.crypto;
                             javax.crypto.*;
                             javax.crypto.spec;
@@ -204,6 +221,8 @@
                             javax.security.auth.*;
                             javax.security.auth.x500;
                             javax.security.auth.x500.*;
+                            javax.transaction;
+                            javax.transaction.xa;
                             <!-- nokogiri -->
                             javax.xml;
                             javax.xml.namespace;

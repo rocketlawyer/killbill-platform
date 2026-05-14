@@ -21,7 +21,7 @@
     <parent>
         <artifactId>killbill-platform-osgi-test-bundles</artifactId>
         <groupId>org.kill-bill.billing</groupId>
-        <version>0.36.9</version>
+        <version>0.36.9-hotfix</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>killbill-platform-osgi-bundles-test-beatrix</artifactId>
@@ -88,7 +88,6 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>jar</goal>
                             <goal>test-jar</goal>
                         </goals>
                         <configuration>

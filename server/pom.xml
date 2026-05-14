@@ -21,7 +21,7 @@
     <parent>
         <artifactId>killbill-platform</artifactId>
         <groupId>org.kill-bill.billing</groupId>
-        <version>0.36.9</version>
+        <version>0.36.9-hotfix</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>killbill-platform-server</artifactId>
@@ -57,7 +57,6 @@
         <dependency>
             <groupId>com.fasterxml.jackson.jaxrs</groupId>
             <artifactId>jackson-jaxrs-json-provider</artifactId>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -83,11 +82,6 @@
         <dependency>
             <groupId>com.palominolabs.metrics</groupId>
             <artifactId>metrics-guice</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.jersey.contribs</groupId>
-            <artifactId>jersey-guice</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -283,7 +277,7 @@
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
+            <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

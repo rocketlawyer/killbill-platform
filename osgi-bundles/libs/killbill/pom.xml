@@ -21,7 +21,7 @@
     <parent>
         <artifactId>killbill-platform-osgi-lib-bundles</artifactId>
         <groupId>org.kill-bill.billing</groupId>
-        <version>0.36.9</version>
+        <version>0.36.9-hotfix</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>killbill-platform-osgi-bundles-lib-killbill</artifactId>
@@ -66,7 +66,7 @@
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
+            <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
